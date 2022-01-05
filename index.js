@@ -1,11 +1,7 @@
 var field = document.getElementById('field');
-var dates;
-
-
-
 
 window.addEventListener('submit',  (e) => {
-    
+ 
     var value = Date.parse(field.value +'T00:00:00');
     localStorage.setItem('updatedDate',value);
     
@@ -18,7 +14,6 @@ function update (){
 
     var difference = goaldate - date;
 
-
     let day = Math.floor(difference/1000/60/60/24);
     let hour= Math.floor(difference/1000/60/60) % 24;
     let minutes = Math.floor(difference/1000/60) % 60;
@@ -30,6 +25,7 @@ function update (){
     document.getElementById("seconds").innerHTML = seconds;
 
 }
+
 setInterval(update, 1000);
 window.addEventListener('load', update);
 
