@@ -6,40 +6,33 @@ var dates;
 
 window.addEventListener('submit',  (e) => {
     
-        var value = Date.parse(field.value +'T00:00:00');
-
-    let goaldate = new Date (value);
+    var value = Date.parse(field.value +'T00:00:00');
+    localStorage.setItem('updatedDate',value);
     
-    var date = new Date ();
-
-    const difference = goaldate - date;
-
-    
-    let day = Math.round(difference/1000/60/60/24);
-    let hour= Math.round(difference/1000/60/60) % 24;
-    let minutes = Math.round(difference/1000/60) % 60;
-    let seconds = Math.round(difference/1000) % 60;
-
-  
-    localStorage.setItem('day', day);
-    localStorage.setItem('hour', hour);
-    localStorage.setItem('minutes', minutes);
-    localStorage.setItem('seconds', seconds);
-
-
 });
 
+function update (){
+    let value = parseInt( localStorage.getItem('updatedDate'));
+    let date = new Date ();
+    let goaldate = new Date (value);
 
-    
-var days = localStorage.getItem('day');
-var hours = localStorage.getItem('hour');
-var minutes = localStorage.getItem('minutes');
-var seconds = localStorage.getItem('seconds');
+    var difference = goaldate - date;
 
-document.getElementById("days").innerHTML = days;
-document.getElementById("hours").innerHTML = hours;
-document.getElementById("minutes").innerHTML = minutes;
-document.getElementById("seconds").innerHTML = seconds;
+
+    let day = Math.floor(difference/1000/60/60/24);
+    let hour= Math.floor(difference/1000/60/60) % 24;
+    let minutes = Math.floor(difference/1000/60) % 60;
+    let seconds = Math.floor(difference/1000) % 60;
+
+    document.getElementById("days").innerHTML = day;
+    document.getElementById("hours").innerHTML = hour;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+}
+setInterval(update, 1000);
+window.addEventListener('load', update);
+
 
 
 
